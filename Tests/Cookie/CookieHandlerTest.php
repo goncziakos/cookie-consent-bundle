@@ -72,11 +72,21 @@ class CookieHandlerTest extends TestCase
     }
 
     /**
+     * Test CookieHandler:save with domain.
+     */
+    public function testCookieHandlerDomain(): void
+    {
+        $this->saveCookieHandler(true, '.example.com');
+        $cookies = $this->response->headers->getCookies();
+        $this->assertSame('.example.com', $cookies[4]->getDomain());
+    }
+
+    /**
      * Save CookieHandler.
      */
-    public function saveCookieHandler(bool $httpOnly): void
+    public function saveCookieHandler(bool $httpOnly, ?string $domain = null): void
     {
-        $cookieHandler = new CookieHandler($httpOnly);
+        $cookieHandler = new CookieHandler($httpOnly, $domain);
 
         $cookieHandler->save([
             'analytics'    => 'true',

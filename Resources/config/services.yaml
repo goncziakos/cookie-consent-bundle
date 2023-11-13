@@ -14,6 +14,7 @@ services:
             $httpOnly: '%ch_cookie_consent.http_only%'
             $formAction: '%ch_cookie_consent.form_action%'
             $csrfProtection: '%ch_cookie_consent.csrf_protection%'
+            $domain: '%ch_cookie_consent.domain%'
 
     ConnectHolland\CookieConsentBundle\:
         resource: '../../'

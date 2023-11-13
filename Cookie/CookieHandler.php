@@ -22,9 +22,12 @@ class CookieHandler
      */
     private $httpOnly;
 
-    public function __construct(bool $httpOnly)
+    private $domain;
+
+    public function __construct(bool $httpOnly, ?string $domain)
     {
         $this->httpOnly = $httpOnly;
+        $this->domain = $domain;
     }
 
     /**
@@ -49,7 +52,7 @@ class CookieHandler
         $expirationDate->add(new DateInterval('P1Y'));
 
         $response->headers->setCookie(
-            new Cookie($name, $value, $expirationDate, '/', null, null, $this->httpOnly, true)
+            new Cookie($name, $value, $expirationDate, '/', $this->domain, null, $this->httpOnly, true)
         );
     }
 }
